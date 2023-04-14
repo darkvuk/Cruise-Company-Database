@@ -1,0 +1,126 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Zaposleni</h1>
+    <br />
+    <button class="btn btn-primary" onclick="generateReport()">Generiši izvještaj</button>
+    <a href="/Zaposleni/Create" class="btn btn-primary">Dodaj novog zaposlenog</a>
+
+    <div>
+        <br />
+        <table class="table table-stripped">
+
+            <tr>
+                <th>ID</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Rođendan</th>
+                <th>Staž</th>
+                <th>Ugovor</th>
+                <th>Pol</th>
+                <th>Email</th>
+                <th>Država</th>
+                <th>Kruzer</th>
+                <th>Plata (&euro;)</th>
+            </tr>
+
+            @foreach (var item in ViewBag.Zaposleni)
+            {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.Ime</td>
+                    <td>@item.Prezime</td>
+                    <td>@item.Datum_rodjenja.ToShortDateString()</td>
+                    <td>@item.Godine_staza</td>
+                    <td>@item.Duzina_ugovora</td>
+                    <td>@item.Pozicija</td>
+                    <td>@item.Pol</td>
+                    @if (item.Drzava.Equals("Sjedinjene Americke Drzave"))
+                    {
+                        <td>SAD</td>
+
+                    }
+                    else if (item.Drzava.Equals("Ujedinjeno Kraljevstvo"))
+                    {
+                        <td>UK</td>
+                    }
+                    else
+                    {
+                        <td>@item.Drzava</td>
+                    }
+                    <td>@item.Kruzer</td>
+                    <td>@item.Plata</td>
+                    <td>
+                        <a class="btn btn-primary" href="@Url.Action("Edit", "Zaposleni", new { zaposleniID = item.ID })">Edit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" href="https://localhost:44389/Zaposleni/ViewZaposleniDetails/@item.ID">Details</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger"><a href="https://localhost:44389/Zaposleni/DeleteZaposleni/@item.ID" style="text-decoration: none; color: white;">Delete</a></button>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <table class="table table-stripped" id="reports-table" style="display:none;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Rodjendan</th>
+                    <th>Staž</th>
+                    <th>Ugovor</th>
+                    <th>Pol</th>
+                    <th>Email</th>
+                    <th>Država</th>
+                    <th>Kruzer</th>
+                    <th>Plata</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.Zaposleni)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.Ime</td>
+                        <td>@item.Prezime</td>
+                        <td>@item.Datum_rodjenja.ToShortDateString()</td>
+                        <td>@item.Godine_staza</td>
+                        <td>@item.Duzina_ugovora</td>
+                        <td>@item.Pozicija</td>
+                        <td>@item.Pol</td>
+                        <td>@item.Drzava</td>
+                        <td>@item.Kruzer</td>
+                        <td>@item.Plata</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <br />
+</div>
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Scripts/custom/shared/sakrij-dugme.js"></script>
+<script src="~/Scripts/jspdf.umd.js"></script>
+<script src="~/Scripts/jspdf.plugin.autotable.js"></script>
+
+<script>
+    function generateReport() {
+        let doc = new jspdf.jsPDF();
+        doc.autoTable({ html: '#reports-table', });
+        doc.save('zaposleni.pdf');
+    }
+</script>
+
+@section footer{
+    <footer>
+        &copy; Great Sea Cruises 2022 - Zaposleni
+    </footer>
+}

@@ -1,0 +1,111 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Putnici</h1>
+    <br />
+    <button class="btn btn-primary" onclick="generateReport()">Generiši izvještaj</button>
+    <a href="/Putnik/Create" class="btn btn-primary">Dodaj novog putnika</a>
+
+    <div>
+        <br />
+        <table class="table table-stripped">
+
+            <tr>
+                <th>ID</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Rodjendan</th>
+                <th>Broj pasoša</th>
+                <th>Država</th>
+                <th>Pol</th>
+                <th>Email</th>
+            </tr>
+
+            @foreach (var item in ViewBag.Putnik)
+            {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.Ime</td>
+                    <td>@item.Prezime</td>
+                    <td>@item.Datum_rodjenja.ToShortDateString()</td>
+                    <td>@item.Br_pasosa</td>
+                    @if (item.Drzava.Equals("Sjedinjene Americke Drzave"))
+                    {
+                        <td>SAD</td>
+
+                    }
+                    else if (item.Drzava.Equals("Ujedinjeno Kraljevstvo"))
+                    {
+                        <td>UK</td>
+                    }
+                    else
+                    {
+                        <td>@item.Drzava</td>
+                    }
+                    <td>@item.Pol</td>
+                    <td>@item.Email</td>
+                    <td>
+                        <a class="btn btn-primary" 
+                           href="@Url.Action("Edit", "Putnik", new { putnikID = item.ID })">Edit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" href="https://localhost:44389/Putnik/ViewPutnikDetails/@item.ID">Details</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger"><a href="https://localhost:44389/Putnik/DeletePutnik/@item.ID" style="text-decoration: none; color: white;">Delete</a></button>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <table class="table table-stripped" id="reports-table" style="display:none;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Rodjendan</th>
+                    <th>Broj pasoša</th>
+                    <th>Država</th>
+                    <th>Pol</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.Putnik)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.Ime</td>
+                        <td>@item.Prezime</td>
+                        <td>@item.Datum_rodjenja.ToShortDateString()</td>
+                        <td>@item.Br_pasosa</td>
+                        <td>@item.Drzava</td>
+                        <td>@item.Pol</td>
+                        <td>@item.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Scripts/custom/shared/sakrij-dugme.js"></script>
+<script src="~/Scripts/jspdf.umd.js"></script>
+<script src="~/Scripts/jspdf.plugin.autotable.js"></script>
+<script>
+    function generateReport() {
+        let doc = new jspdf.jsPDF();
+        doc.autoTable({ html: '#reports-table', });
+        doc.save('putnici.pdf');
+    }
+</script>
+@section footer{
+    <footer>
+        &copy; Great Sea Cruises 2022 - Putnici
+    </footer>
+}

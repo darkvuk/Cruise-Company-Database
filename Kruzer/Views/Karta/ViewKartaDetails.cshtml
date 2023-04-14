@@ -1,0 +1,33 @@
+﻿@model Kruzer.Repository.Models.DB.KartaModel
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Detalji Karte</h1>
+    <br />
+    @if (@Model.Broj != -1)
+    {
+        <p><b>Broj:</b> @Model.Broj</p>
+        <p><b>Cijena:</b> @Model.Cijena</p>
+        <p><b>ID Krstarenja:</b> @Model.ID_Krstarenja</p>
+        <p><b>ID Putnika:</b> @Model.ID_Putnika</p>
+        <p><b>IMO Broj:</b> @Model.IMO_Broj</p>
+        <p><b>ID Kabine:</b> @Model.ID_Kabine</p>
+    }
+    else
+    {
+        <p>Ova karta ne postoji.</p>
+    }
+
+    <a href="https://localhost:44389/Karta">← Povratak nazad</a>
+</div>
+
+@section footer{
+    <hr />
+    <footer>
+        &copy; Great Sea Cruises 2022
+    </footer>
+}

@@ -1,0 +1,115 @@
+﻿@{ 
+    var controllerName = ViewContext.RouteData.Values["controller"];
+    var actionName = ViewContext.RouteData.Values["action"];
+
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Karte Portal</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <main>
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="d-flex flex-column flex-shrink-0 p-3 col-md-2" style="width: 250px; height: 100vh; background-color: #8CC7DC; position: fixed">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                        <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                        <img src="https://i.imgur.com/g6wihdY.png" style="width: 75%; height: 75%" />
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link link-dark
+                               @if (controllerName.Equals("Home") && actionName.Equals("Index")) { Write("active"); }" )>
+                                Početna
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Karta" class="nav-link link-dark
+                               @if (controllerName.Equals("Karta") && actionName.Equals("Index")) { Write("active"); }" )>
+                                Karte
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Putnik" class="nav-link link-dark
+                               @if (controllerName.Equals("Putnik") && actionName.Equals("Index")) { Write("active"); }" )>
+                                Putnici
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Luka" class="nav-link link-dark
+                               @if (controllerName.Equals("Luka") && actionName.Equals("Index")) { Write("active"); }" )>
+                                Luke
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Zaposleni" class="nav-link link-dark
+                               @if (controllerName.Equals("Zaposleni") && actionName.Equals("Index")) { Write("active"); }" )>
+                                Zaposleni
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Home/Contact" class="nav-link link-dark
+                               @if (controllerName.Equals("Home") && actionName.Equals("Contact")) { Write("active"); }" )>
+                                Kontakt
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Search" class="nav-link link-dark
+                               @if (controllerName.Equals("Search")) { Write("active"); }" )>
+                                Pretraga
+                            </a>
+                        </li>
+                        <li id="list-item-login" class="nav-item">
+                            <a href="/KorisnikManagement/Login" class="nav-link link-dark
+                               @if (controllerName.Equals("KorisnikManagement") && actionName.Equals("Login")) { Write("active"); }" )>
+                                Log in
+                            </a>
+                        </li>
+                        <li id="list-item-logout" class="nav-item">
+                            <a class="nav-link link-dark" style="cursor: pointer;">
+                                Log out
+                            </a>
+                        </li>
+                        <li id="list-item-register" class="nav-item">
+                            <a href="/Register" class="nav-link link-dark
+                               @if (controllerName.Equals("Register") && actionName.Equals("Index")) { Write("active"); }" )>
+                                Register
+                            </a>
+                        </li>
+
+                    </ul>
+                    <hr>
+                    <div class="dropdown">
+                        <br />
+                    </div>
+                </div>
+
+                <main class="col-md-10 ms-sm-auto log-lg-10 px-md-4">
+
+
+                    @RenderBody()
+                    @RenderSection("footer")
+
+                </main>
+            </div>
+        </div>
+
+
+    </main>
+
+
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/popper.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/custom/shared/main-layout.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿@model Kruzer.Repository.Models.DB.LukaModel
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <br />
+        <h1>Pretraga</h1>
+        <br />
+
+        @using (@Html.BeginForm("Search", "Search", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label>Luke po zemljama</label>
+                @Html.TextAreaFor(m => m.Ime_drzave, new { @class = "form-control", @rows = 1 })
+                <br />
+            </div>
+            <button type="submit" class="btn btn-primary">Sačuvaj</button>
+        }
+
+    </div>
+</body>
+</html>
+
+@section footer{
+    <footer>
+        <br />
+        <hr/>
+        &copy; Great Sea Cruises 2022
+    </footer>
+}

@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Luke</h1>
+    <br />
+    <button class="btn btn-primary" onclick="generateReport()">Generiši izvještaj</button>
+    <a href="/Luka/Create" class="btn btn-primary">Dodaj novu luku</a>
+
+    <div>
+        <br />
+        <table class="table table-stripped">
+
+            <tr>
+                <th>Kod luke</th>
+                <th>Drzava</th>
+                <th>Grad</th>
+            </tr>
+
+
+            @foreach (var item in ViewBag.Luka)
+            {
+                //if (@item.Ime_drzave == "Sjedinjene Americke Drzave") { 
+                <tr>
+                    <td>@item.KOD</td>
+                    <td>@item.Ime_drzave</td>
+                    <td>@item.Ime_grada</td>
+                    <td>
+                        <a class="btn btn-primary" 
+                           href="@Url.Action("Edit", "Luka", new { LukaID = item.KOD })" id="edit">Edit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" href="https://localhost:44389/Luka/ViewLukaDetails/@item.KOD">Details</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger"><a href="https://localhost:44389/Luka/DeleteLuka/@item.KOD" style="text-decoration: none; color: white;">Delete</a></button>
+                    </td>
+                </tr>
+                //}
+            }
+        </table>
+    </div>
+    <br />
+    <table class="table table-stripped" id="reports-table" style="display:none;">
+        <thead>
+            <tr>
+                <th>Kod luke</th>
+                <th>Drzava</th>
+                <th>Grad</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Luka)
+            {
+                <tr>
+                    <td>@item.KOD</td>
+                    <td>@item.Ime_drzave</td>
+                    <td>@item.Ime_grada</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<br />
+</div>
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Scripts/custom/shared/sakrij-dugme.js"></script>
+<script src="~/Scripts/jspdf.umd.js"></script>
+<script src="~/Scripts/jspdf.plugin.autotable.js"></script>
+
+<script>
+    function generateReport() {
+        let doc = new jspdf.jsPDF();
+        doc.autoTable({ html: '#reports-table', });
+        doc.save('luke.pdf');
+    }
+</script>
+
+@section footer{
+    <footer>
+        &copy; Great Sea Cruises 2022 - Luke
+    </footer>
+}

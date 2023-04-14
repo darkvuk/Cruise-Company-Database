@@ -1,0 +1,65 @@
+﻿@model Kruzer.Repository.Models.DB.KartaModel
+
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Dodaj novu kartu</h1>
+    @using (@Html.BeginForm("Store", "Karta", FormMethod.Post))
+    {
+     
+        if(@Model != null)
+                {
+                    @Html.HiddenFor(m => m.Broj)
+                }
+     
+     @*
+            <div class="form-group">
+                <label>ID Karte</label>
+                @Html.TextAreaFor(m => m.Broj, new { @class = "form-control", @rows = 1 })
+                <br />
+            </div>
+    *@
+    <div class="form-group">
+        <label>ID Krstarenja</label>
+        @Html.TextAreaFor(m => m.ID_Krstarenja, new { @class = "form-control", @rows = 1 })
+        <br />
+    </div>
+    <div class="form-group">
+        <label>Ime i prezime</label>
+        @Html.DropDownListFor(m => m.ID_Putnika,
+       new SelectList(ViewBag.Putnik, "ID", "FullName"), new { @class = "form-control" })
+        <br />
+    </div>
+    <div class="form-group">
+        <label>Kruzer</label>
+        @Html.DropDownListFor(m => m.IMO_Broj,
+       new SelectList(ViewBag.Kruzer, "IMO_Broj", "Ime"), new { @class = "form-control" })
+        <br />
+    </div>
+
+    <div class="form-group">
+        <label>ID Kabine</label>
+        @Html.TextAreaFor(m => m.ID_Kabine, new { @class = "form-control", @rows = 1 })
+        <br />
+    </div>
+    <div class="form-group">
+        <label>Cijena</label>
+        @Html.TextAreaFor(m => m.Cijena, new { @class = "form-control", @rows = 1 })
+        <br />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sačuvaj</button>
+}
+</div>
+
+
+@section footer{
+        <hr />
+        <footer>
+            &copy; Great Sea Cruises 2022
+        </footer>
+}

@@ -1,0 +1,81 @@
+﻿@model Kruzer.Repository.Models.DB.PutnikModel
+
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Dodaj novu kartu</h1>
+    @using (@Html.BeginForm("Store", "Putnik", FormMethod.Post))
+    {
+
+        if (@Model != null)
+            {
+                @Html.HiddenFor(m => m.ID)
+            }
+
+        @*
+            <div class="form-group">
+                <label>ID putnika</label>
+                @Html.TextAreaFor(m => m.ID, new { @class = "form-control", @rows = 1 })
+                <br />
+            </div>*@
+
+        <div class="form-group">
+            <label>Ime</label>
+            @Html.TextAreaFor(m => m.Ime, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Prezime</label>
+            @Html.TextAreaFor(m => m.Prezime, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Datum rođenja</label>
+            @Html.TextBoxFor(m => m.Datum_rodjenja, @"{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Broj pasoša (9 cifara)</label>
+            @Html.TextAreaFor(m => m.Br_pasosa, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>E-mail</label>
+            @Html.TextAreaFor(m => m.Email, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Država</label>
+            @Html.DropDownListFor(m => m.Drzava,
+           new SelectList(ViewBag.Drzava, "Ime_drzave", "Ime_drzave"), new { @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Pol</label>
+            @Html.DropDownListFor(m => m.Pol,
+           new SelectList(ViewBag.Pol, "Naziv_pola", "Naziv_pola"), new { @class = "form-control" })
+            <br />
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Sačuvaj</button>
+    }
+</div>
+
+
+@section footer{
+    <hr />
+    <footer>
+        &copy; Great Sea Cruises 2022
+    </footer>
+}

@@ -1,0 +1,29 @@
+﻿@model Kruzer.Repository.Models.DB.PutnikModel
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Detalji Putnika</h1>
+    <br />
+    <p><b>ID:</b> @Model.ID</p>
+    <p><b>Ime:</b> @Model.Ime</p>
+    <p><b>Prezime:</b> @Model.Prezime</p>
+    <p><b>Datum rođenja:</b> @Model.Datum_rodjenja</p>
+    <p><b>Broj pasoša:</b> @Model.Br_pasosa</p>
+    <p><b>Država:</b> @Model.Drzava</p>
+    <p><b>Pol:</b> @Model.Pol</p>
+    <p><b>Email:</b> @Model.Email</p>
+
+
+    <a href="https://localhost:44389/Putnik">← Povratak nazad</a>
+</div>
+
+@section footer{
+    <hr />
+    <footer>
+        &copy; Great Sea Cruises 2022
+    </footer>
+}

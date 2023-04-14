@@ -1,0 +1,49 @@
+﻿@model Kruzer.Repository.Models.DB.KorisnikModel
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Register</h1>
+    <br />
+    @using (@Html.BeginForm("Store", "Register", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label>Ime</label>
+            @Html.TextAreaFor(m => m.Name, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Prezime</label>
+            @Html.TextAreaFor(m => m.Surname, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>
+        <div class="form-group">
+            <label>Korisničko ime</label>
+            @Html.TextAreaFor(m => m.Username, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>
+        <div class="form-group">
+            <label>Lozinka</label>
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @rows = 1, })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Sign up</button>
+        </div>
+    }
+</div>
+
+
+
+@section footer{
+    <footer>
+        <br />
+        <hr />
+        &copy; Great Sea Cruises 2022
+    </footer>
+}

@@ -1,0 +1,54 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Luke</h1>
+    <br />
+
+    <div>
+        <button class="btn btn-primary" onclick="generateReport()">Generiši izvještaj</button>
+        <br />
+        <br />
+        <table class="table table-stripped" id="tabela">
+
+            <thead>
+                <tr>
+                    <th>Kod luke</th>
+                    <th>Drzava</th>
+                    <th>Grad</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in ViewBag.Luka)
+                {
+
+                    <tr>
+                        <td>@item.KOD</td>
+                        <td>@item.Ime_drzave</td>
+                        <td>@item.Ime_grada</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <script src="~/Scripts/jquery-3.6.0.js"></script>
+        <script src="~/Scripts/jspdf.umd.js"></script>
+        <script src="~/Scripts/jspdf.plugin.autotable.js"></script>
+
+<script>
+    function generateReport() {
+        let doc = new jspdf.jsPDF();
+        doc.autoTable({ html: '#tabela', });
+        doc.save('luke.pdf');
+    }
+</script>
+
+@section footer{
+    <footer>
+        &copy; Great Sea Cruises 2022 - Luke
+    </footer>
+}

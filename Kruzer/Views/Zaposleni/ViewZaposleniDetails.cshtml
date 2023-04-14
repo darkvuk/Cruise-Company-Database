@@ -1,0 +1,32 @@
+﻿@model Kruzer.Repository.Models.DB.ZaposleniModel
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Detalji Zaposlenog</h1>
+    <br />
+    <p><b>ID:</b> @Model.ID</p>
+    <p><b>Ime:</b> @Model.Ime</p>
+    <p><b>Prezime:</b> @Model.Prezime</p>
+    <p><b>Datum rođenja:</b> @Model.Datum_rodjenja</p>
+    <p><b>Godine staža:</b> @Model.Godine_staza</p>
+    <p><b>Dužina ugovora:</b> @Model.Duzina_ugovora</p>
+    <p><b>Pozicija:</b> @Model.Pozicija</p>
+    <p><b>Pol:</b> @Model.Pol</p>
+    <p><b>Država:</b> @Model.Drzava</p>
+    <p><b>Kruzer:</b> @Model.Kruzer</p>
+    <p><b>Plata (&euro;):</b> @Model.Plata</p>
+
+
+    <a href="https://localhost:44389/Zaposleni">← Povratak nazad</a>
+</div>
+
+@section footer{
+    <hr />
+    <footer>
+        &copy; Great Sea Cruises 2022
+    </footer>
+}

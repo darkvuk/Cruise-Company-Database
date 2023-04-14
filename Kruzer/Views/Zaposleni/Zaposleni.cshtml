@@ -1,0 +1,103 @@
+﻿@model Kruzer.Repository.Models.DB.ZaposleniModel
+
+@{
+    ViewBag.Title = "My View's Title";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Dodaj novog zaposlenog</h1>
+    @using (@Html.BeginForm("Store", "Zaposleni", FormMethod.Post))
+    {
+
+        if (@Model != null)
+            {
+                @Html.HiddenFor(m => m.ID)
+            }
+
+        @*
+        <div class="form-group">
+            <label>ID zaposlenog</label>
+            @Html.TextAreaFor(m => m.ID, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>*@
+
+        <div class="form-group">
+            <label>Ime</label>
+            @Html.TextAreaFor(m => m.Ime, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Prezime</label>
+            @Html.TextAreaFor(m => m.Prezime, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Datum rođenja</label>
+            @Html.TextBoxFor(m => m.Datum_rodjenja, @"{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Godine staza</label>
+            @Html.TextAreaFor(m => m.Godine_staza, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Dužina ugovora</label>
+            @Html.TextAreaFor(m => m.Duzina_ugovora, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Država</label>
+            @Html.DropDownListFor(m => m.Drzava,
+           new SelectList(ViewBag.Drzava, "Ime_drzave", "Ime_drzave"), new { @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Pol</label>
+            @Html.DropDownListFor(m => m.Pol,
+           new SelectList(ViewBag.Pol, "Naziv_pola", "Naziv_pola"), new { @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Kruzer</label>
+            @Html.DropDownListFor(m => m.Kruzer,
+           new SelectList(ViewBag.Kruzer, "IMO_Broj", "Ime"), new { @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Zanimanje</label>
+            @Html.DropDownListFor(m => m.Pozicija,
+           new SelectList(ViewBag.Tip, "Naziv_tipa", "Naziv_tipa"), new { @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="form-group">
+            <label>Mjesečna plata</label>
+            @Html.TextAreaFor(m => m.Plata, new { @class = "form-control", @rows = 1 })
+            <br />
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Sačuvaj</button>
+        /*<a href="/Zaposleni/Store" class="btn btn-primary">Sačuvaj</a>*/
+
+    }
+</div>
+
+
+@section footer{
+    <hr />
+    <footer>
+        &copy; Great Sea Cruises 2022
+    </footer>
+}

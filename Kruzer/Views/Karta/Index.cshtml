@@ -1,0 +1,101 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Karte</h1>
+    <br />
+
+    <button class="btn btn-primary" onclick="generateReport()">Generiši izvještaj</button>
+    <a href="/Karta/Create" class="btn btn-primary" id="dodaj">Dodaj novu kartu</a>
+
+    <div>
+        <br />
+        <table class="table table-stripped">
+
+            <tr>
+                <th>ID</th>
+                <th>Cijena</th>
+                <th>ID krstarenja</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Ime kruzera</th>
+                <th>Broj kabine</th>
+            </tr>
+
+            @foreach (var item in ViewBag.Karta)
+            {
+                <tr>
+                    <td>@item.Broj</td>
+                    <td>@item.Cijena</td>
+                    <td>@item.ID_Krstarenja</td>
+                    <td>@item.Ime_putnika</td>
+                    <td>@item.Prezime_putnika</td>
+                    <td>@item.Ime_kruzera</td>
+                    <td>@item.ID_Kabine</td>
+                    <td>
+                        <a class="btn btn-primary"
+                           href="@Url.Action("Edit", "Karta", new { kartaID = item.Broj })" id="edit">Edit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" href="https://localhost:44389/Karta/ViewKartaDetails/@item.Broj">Details</a>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" onclick="deleteKarta(@item.Broj)" id="delete">Delete</button>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <table class="table table-stripped" id="reports-table" style="display:none;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cijena</th>
+                    <th>ID krstarenja</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Ime kruzera</th>
+                    <th>Broj kabine</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.Karta)
+                {
+                    <tr>
+                        <td>@item.Broj</td>
+                        <td>@item.Cijena</td>
+                        <td>@item.ID_Krstarenja</td>
+                        <td>@item.Ime_putnika</td>
+                        <td>@item.Prezime_putnika</td>
+                        <td>@item.Ime_kruzera</td>
+                        <td>@item.ID_Kabine</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <br />
+</div>
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Scripts/custom/shared/sakrij-dugme.js"></script>
+<script src="~/Scripts/custom/Karta/index.js"></script>
+<script src="~/Scripts/jspdf.umd.js"></script>
+<script src="~/Scripts/jspdf.plugin.autotable.js"></script>
+
+<script>
+    function generateReport() {
+        let doc = new jspdf.jsPDF();
+        doc.autoTable({ html: '#reports-table',  });
+        doc.save('karte.pdf');
+    }
+</script>
+
+@section footer{
+    <footer>
+        &copy; Great Sea Cruises 2022 - Karte
+    </footer>
+}

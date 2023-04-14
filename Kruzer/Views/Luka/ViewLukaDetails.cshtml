@@ -1,0 +1,24 @@
+﻿@model Kruzer.Repository.Models.DB.LukaModel
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+    <br />
+    <h1>Detalji Luke</h1>
+    <br />
+    <p><b>Kod:</b> @Model.KOD</p>
+    <p><b>Ime države:</b> @Model.Ime_drzave</p>
+    <p><b>Ime grada:</b> @Model.Ime_grada</p>
+    
+
+    <a href="https://localhost:44389/Luka">← Povratak nazad</a>
+</div>
+
+@section footer{
+    <hr />
+    <footer>
+        &copy; Great Sea Cruises 2022
+    </footer>
+}
